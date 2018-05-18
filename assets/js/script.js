@@ -1,6 +1,14 @@
 updatePrice("BTC", "USD")
 
+var btnbtc = document.getElementById("btnbtc");
+var btneth = document.getElementById("btneth");
+var btnltc = document.getElementById("btnltc");
+var btnxrp = document.getElementById("btnxrp");
 
+btnbtc.addEventListener("click", function(){updatePrice("BTC", "USD")});
+btneth.addEventListener("click", function(){updatePrice("ETH", "USD")});
+btnltc.addEventListener("click", function(){updatePrice("LTC", "USD")});
+btnxrp.addEventListener("click", function(){updatePrice("XRP", "USD")});
 
 function updatePrice(symbol, currency) {
     var xmlHttp = new XMLHttpRequest();
