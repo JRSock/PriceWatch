@@ -1,4 +1,6 @@
-updatePrice("BTC", "USD")
+var currency = "USD";
+
+updatePrice("BTC", currency);
 
 //Set VARS to the button elements
 var btnbtc = document.getElementById("btnbtc");
@@ -6,17 +8,24 @@ var btneth = document.getElementById("btneth");
 var btnltc = document.getElementById("btnltc");
 var btnxrp = document.getElementById("btnxrp");
 
+function clearActive(){
+  btnbtc.classList.remove("active");
+  btneth.classList.remove("active");
+  btnltc.classList.remove("active");
+  btnxrp.classList.remove("active");
+}
+
 //Allow user to click button to change coin
-btnbtc.addEventListener("click", function(){updatePrice("BTC", "USD")});
-btneth.addEventListener("click", function(){updatePrice("ETH", "USD")});
-btnltc.addEventListener("click", function(){updatePrice("LTC", "USD")});
-btnxrp.addEventListener("click", function(){updatePrice("XRP", "USD")});
+btnbtc.addEventListener("click", function(){updatePrice("BTC", currency); clearActive(); this.classList.add("active");});
+btneth.addEventListener("click", function(){updatePrice("ETH", currency); clearActive(); this.classList.add("active");});
+btnltc.addEventListener("click", function(){updatePrice("LTC", currency); clearActive(); this.classList.add("active");});
+btnxrp.addEventListener("click", function(){updatePrice("XRP", currency); clearActive(); this.classList.add("active");});
 
 //Updates price based on coin and users selected currency
 function updatePrice(symbol, currency) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var data = JSON.parse(xmlHttp.responseText);
 
             //Set vars to values taken from API
@@ -41,3 +50,66 @@ function updatePrice(symbol, currency) {
     xmlHttp.open("GET", 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,LTC,XRP&tsyms=USD', true); // true for asynchronous
     xmlHttp.send(null);
 }
+
+var openValues = new Array();
+var closeValues = new Array();
+
+//Gets historical data for chart
+function getHistorical(symbol, currency) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        var data = JSON.parse(xmlHttp.responseText);
+
+
+        var count = 0;
+
+        while(count < 169){
+            var fuckthisshit = openValues.push(data["Data"][count]["open"]);
+            var idontneedthis = closeValues.push(data["Data"][count]["close"]);
+            count++;
+        }
+    }
+  }
+    var url = "https://min-api.cryptocompare.com/data/histohour?fsym=BTC&tsym=USD&limit=168";
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+
+getHistorical("BTC", "USD");
+
+// var canvas = document.getElementById('myChart');
+// var data = {
+//     labels: ["1D", "2D", "3D", "4D", "5D", "6D", "7D"],
+//     datasets: [
+//         {
+//             label: "7d Price Chart",
+//             fill: false,
+//             lineTension: 0.1,
+//             backgroundColor: "rgba(75,192,192,0.4)",
+//             borderColor: "rgba(75,192,192,1)",
+//             borderCapStyle: 'butt',
+//             borderDash: [],
+//             borderDashOffset: 0.0,
+//             borderJoinStyle: 'miter',
+//             pointBorderColor: "rgba(75,192,192,1)",
+//             pointBackgroundColor: "#fff",
+//             pointBorderWidth: 1,
+//             pointHoverRadius: 5,
+//             pointHoverBackgroundColor: "rgba(75,192,192,1)",
+//             pointHoverBorderColor: "rgba(220,220,220,1)",
+//             pointHoverBorderWidth: 2,
+//             pointRadius: 5,
+//             pointHitRadius: 10,
+//             data: closeValues,
+//         }
+//     ]
+// };
+//
+// var option = {
+// 	showLines: true
+// };
+// var myLineChart = Chart.Line(canvas,{
+// 	data:data,
+//   options:option
+// });

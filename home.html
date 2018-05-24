@@ -5,6 +5,7 @@
     <title>Price Watch</title>
     <meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   </head>
 
@@ -14,22 +15,54 @@
         To get started, select a currency below!
       </div>
 
-        <button type="button" id="btnbtc" style="Width: 24.7%;" class="btn btn-primary btn-lg">BTC</button>
-        <button type="button" id="btneth" style="Width: 24.7%;" class="btn btn-primary btn-lg">ETH</button>
-        <button type="button" id="btnltc" style="Width: 24.7%;" class="btn btn-primary btn-lg">LTC</button>
-        <button type="button" id="btnxrp" style="Width: 24.7%;" class="btn btn-primary btn-lg">XRP</button>
+        <button type="button" id="btnbtc" style="Width: 24.7%;" class="btn btn-primary btn-lg active">Bitcoin</button>
+        <button type="button" id="btneth" style="Width: 24.7%;" class="btn btn-primary btn-lg">Ethereum</button>
+        <button type="button" id="btnltc" style="Width: 24.7%;" class="btn btn-primary btn-lg">Litecoin</button>
+        <button type="button" id="btnxrp" style="Width: 24.7%;" class="btn btn-primary btn-lg">Ripple</button>
 
-        <h1 id="price">Loading...</h1>
-        <h1 id="volume">Loading...</h1>
-        <h1 id="highday">Loading...</h1>
-        <h1 id="lowday">Loading...</h1>
-        <h1 id="change24h">Loading...</h1>
-        <h1 id="changepct24h">Loading...</h1>
-        <h1 id="mktcap">Loading...</h1>
+
+        <div>
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Price</h1>
+            <h1 id="price" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Volume ($)</h1>
+            <h1 id="volume" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >High</h1>
+            <h1 id="highday" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Low</h1>
+            <h1 id="lowday" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Change ($)</h1>
+            <h1 id="change24h" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Change (%)</h1>
+            <h1 id="changepct24h" style="font-size: 172%;" >Loading...</h1>
+          </div>
+
+          <div class="dataDisplay">
+            <h1 style="font-size: 172%;" >Market Cap</h1>
+            <h1 id="mktcap" style="font-size: 172%;" >Loading...</h1>
+          </div>
+        </div>
+
+        <canvas id="myChart" width="400" height="250"></canvas>
 
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
