@@ -45,7 +45,28 @@ function updatePrice(symbol, currency) {
             document.getElementById("change24h").innerHTML = change24H;
             document.getElementById("changepct24h").innerHTML = changePCT24H + ' %';
             document.getElementById("mktcap").innerHTML = MKTCap;
+
+
+            document.getElementById("color1").classList.remove("priceDown");
+            document.getElementById("color2").classList.remove("priceDown");
+            document.getElementById("color1").classList.remove("priceUp");
+            document.getElementById("color2").classList.remove("priceUp");
+
+            if(data["RAW"][symbol][currency]["CHANGE24HOUR"] < 0){
+              document.getElementById("color1").classList.add("priceDown");
+              document.getElementById("color2").classList.add("priceDown");
+            }
+            if(data["RAW"][symbol][currency]["CHANGE24HOUR"] > 0){
+              document.getElementById("color1").classList.add("priceUp");
+              document.getElementById("color2").classList.add("priceUp");
+            }
         }
+
+
+        // TODO:
+        // 1. Remove classes when not active
+        // 2. Color entire box not just price text
+        // 3. Add Green color when price UP
     }
     xmlHttp.open("GET", 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,LTC,XRP&tsyms=USD', true); // true for asynchronous
     xmlHttp.send(null);
@@ -65,7 +86,7 @@ function getHistorical(symbol, currency) {
         var count = 0;
 
         while(count < 169){
-            var fuckthisshit = openValues.push(data["Data"][count]["open"]);
+            var lol = openValues.push(data["Data"][count]["open"]);
             var idontneedthis = closeValues.push(data["Data"][count]["close"]);
             count++;
         }
@@ -75,41 +96,3 @@ function getHistorical(symbol, currency) {
     xmlHttp.open("GET", url, true);
     xmlHttp.send(null);
 }
-
-getHistorical("BTC", "USD");
-
-// var canvas = document.getElementById('myChart');
-// var data = {
-//     labels: ["1D", "2D", "3D", "4D", "5D", "6D", "7D"],
-//     datasets: [
-//         {
-//             label: "7d Price Chart",
-//             fill: false,
-//             lineTension: 0.1,
-//             backgroundColor: "rgba(75,192,192,0.4)",
-//             borderColor: "rgba(75,192,192,1)",
-//             borderCapStyle: 'butt',
-//             borderDash: [],
-//             borderDashOffset: 0.0,
-//             borderJoinStyle: 'miter',
-//             pointBorderColor: "rgba(75,192,192,1)",
-//             pointBackgroundColor: "#fff",
-//             pointBorderWidth: 1,
-//             pointHoverRadius: 5,
-//             pointHoverBackgroundColor: "rgba(75,192,192,1)",
-//             pointHoverBorderColor: "rgba(220,220,220,1)",
-//             pointHoverBorderWidth: 2,
-//             pointRadius: 5,
-//             pointHitRadius: 10,
-//             data: closeValues,
-//         }
-//     ]
-// };
-//
-// var option = {
-// 	showLines: true
-// };
-// var myLineChart = Chart.Line(canvas,{
-// 	data:data,
-//   options:option
-// });
